@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Claim Reward - Digital Earner</title>
+    <link rel="icon" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/claim.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box">
+            <span class="digital-title">Digital Earner</span>
+            <button class="close-btn" id="closeMenuBtn">✕</button>
+        </div>
+        <div class="menu-box" id="backToDashboard">
+            <span class="menu-link">← Back</span>
+        </div>
+        <div class="menu-box"><a href="../index.html" class="menu-link">🏠 Home</a></div>
+        <div class="menu-box"><a href="about.html" class="menu-link">📖 About Us</a></div>
+        <div class="menu-box"><a href="help.html" class="menu-link">📞 Contact Us</a></div>
+        <div class="menu-box"><a href="how-it-works.html" class="menu-link">❓ How It Works</a></div>
+    </div>
+</div>
+
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="../images/img.png" alt="Logo" class="logo-img">
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+</div>
+
+<div class="claim-container">
+    
+    <div class="claim-card">
+        <div class="section-title">
+            <span class="emoji">👤</span>
+            Your Details (Claimant)
+        </div>
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="claimantName" class="readonly-field" readonly>
+        </div>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="claimantEmail" class="readonly-field" readonly>
+        </div>
+        <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" id="claimantMobile" class="readonly-field" readonly>
+        </div>
+    </div>
+
+    <div class="claim-card">
+        <div class="section-title">
+            <span class="emoji">🎯</span>
+            Referred User Details
+            <span style="font-size: 11px; font-weight: normal; color:#64748b;">(जिसके liye claim kar rahe ho)</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Referred User's Full Name <span class="required">*</span></label>
+            <input type="text" id="referredName" placeholder="Enter name of person you referred">
+            <div id="referredNameError" class="error-text"></div>
+        </div>
+        
+        <div class="form-group" style="position: relative;">
+            <label>Referred User's Email <span class="required">*</span></label>
+            <input type="email" id="referredEmail" placeholder="Enter referred person's email" autocomplete="off">
+            <div id="referredEmailError" class="error-text"></div>
+            <div class="email-suggestions" id="emailSuggestions"></div>
+        </div>
+        
+        <div class="form-group">
+            <label>Referred User's Mobile Number <span class="required">*</span></label>
+            <input type="tel" id="referredMobile" placeholder="10-digit mobile number" maxlength="10">
+            <div id="referredMobileError" class="error-text"></div>
+        </div>
+        
+        <div class="form-group">
+            <label>Broker Name <span class="required">*</span></label>
+            <select id="brokerName">
+                <option value="">Select Broker</option>
+                <option value="Angel One">Angel One</option>
+                <option value="Upstox">Upstox</option>
+                <option value="5Paisa">5Paisa</option>
+                <option value="m.Stock">m.Stock</option>
+            </select>
+            <div id="brokerError" class="error-text"></div>
+        </div>
+        
+        <div class="form-group">
+            <label>Screenshot Proof <span class="required">*</span></label>
+            <div class="file-upload" onclick="document.getElementById('screenshot').click()">
+                <span class="upload-icon">📸 ➕</span>
+                <p>Click to upload screenshot (JPG, PNG, max 2MB)</p>
+            </div>
+            <input type="file" id="screenshot" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none" onchange="showFileName()">
+            <div id="fileName"></div>
+            <div id="screenshotError" class="error-text"></div>
+        </div>
+        
+        <button class="submit-btn" id="submitBtn">Submit Claim →</button>
+    </div>
+    
+</div>
+
+<div class="footer">
+    © 2026 Digital Earner · All rights reserved
+</div>
+
+<div class="success-popup" id="successPopup">
+    <div class="icon">✅</div>
+    <h3>Claim Submitted!</h3>
+    <p>Your claim has been submitted successfully.<br>Admin will verify within 24 hours.</p>
+    <button id="okBtn">OK</button>
+</div>
+
+<div class="overlay" style="z-index:1999; display:none;" id="popupOverlay"></div>
+
+<div class="error-popup" id="errorPopup">
+    <div class="icon">❌</div>
+    <h3>Submission Failed</h3>
+    <p id="errorMessage">Something went wrong. Please try again.</p>
+    <button id="errorOkBtn">Try Again</button>
+</div>
+
+<div id="toastMessage" class="toast-message"></div>
+
+
+<script type="module" src="../js/claim.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Top Performers - Digital Earner</title>
+    <link rel="icon" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/performer.css">
+</head>
+
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box">
+            <span class="digital-title">Digital Earner</span>
+            <button class="close-btn" onclick="closeMenuOnly()">✕</button>
+        </div>
+        
+        <div class="menu-box" onclick="goToDashboard()">
+    <span class="menu-link">← Back</span>
+</div>
+        
+        <div class="menu-box">
+            <a href="../index.html" class="menu-link">🏠 Home</a>
+        </div>
+        <div class="menu-box">
+            <a href="about.html" class="menu-link">📖 About Us</a>
+        </div>
+<div class="menu-box">
+    <a href="help.html" class="menu-link">📞 Contac Us</a>
+    
+        </div>
+        <div class="menu-box">
+            <a href="how-it-works.html" class="menu-link">❓ How It Works</a>
+        </div>
+    </div>
+</div>
+
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="../images/img.png" alt="Logo" class="logo-img">
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" onclick="openMenuOnly()">☰</button>
+    </div>
+</div>
+
+<div class="global-box">
+    <div class="global-title">🏆 Global Performers 🏆</div>
+    <div class="global-sub">Meet Daily New Achievers</div>
+</div>
+
+<div class="today">
+    ⭐ Today's Top Performers ⭐
+</div>
+
+<div class="card-area">
+
+    <div class="flip-container">
+        <div class="flip-card" id="card1" onclick="flip(this,'money1')">
+            <div class="card front">
+                <div class="rank">1st</div>
+                <div class="name">
+                    <span class="emoji">🥂</span> Congratulations 👏
+                </div>
+                <div class="username" id="name1"></div>
+                <div class="earning">
+                    Single Day Earning <span class="amount-front" id="front1"></span>
+                </div>
+                <div class="crown">👑</div>
+                <div class="champion">1st Place Champion!</div>
+            </div>
+            <div class="card back">
+                <div class="community">Digital Earner</div>
+                <div class="tagline">Earn Without Any Investment</div>
+                <div class="profile">
+                    <img src="" alt="Performer">
+                </div>
+                <div class="user" id="back1"></div>
+                <div class="amount">₹<span id="money1">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container">
+        <div class="flip-card" id="card2" onclick="flip(this,'money2')">
+            <div class="card front">
+                <div class="rank">2nd</div>
+                <div class="name"><span class="emoji">🥂</span>Congratulations 👏</div>
+                <div class="username" id="name2"></div>
+                <div class="earning">
+                    Single Day Earning <span class="amount-front" id="front2"></span>
+                </div>
+                <div class="crown">👑</div>
+                <div class="champion">2nd Place Champion!</div>
+            </div>
+            <div class="card back">
+                <div class="community">Digital Earner</div>
+                <div class="tagline">Earn Without Any Investment</div>
+                <div class="profile">
+                    <img src="" alt="Performer">
+                </div>
+                <div class="user" id="back2"></div>
+                <div class="amount">₹<span id="money2">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flip-container">
+        <div class="flip-card" id="card3" onclick="flip(this,'money3')">
+            <div class="card front">
+                <div class="rank">3rd</div>
+                <div class="name"><span class="emoji">🥂</span>Congratulations 👏</div>
+                <div class="username" id="name3"></div>
+                <div class="earning">
+                    Single Day Earning <span class="amount-front" id="front3"></span>
+                </div>
+                <div class="crown">👑</div>
+                <div class="champion">3rd Place Champion!</div>
+            </div>
+            <div class="card back">
+                <div class="community">Digital Earner</div>
+                <div class="tagline">Earn Without Any Investment</div>
+                <div class="profile">
+                    <img src="" alt="Performer">
+                </div>
+                <div class="user" id="back3"></div>
+                <div class="amount">₹<span id="money3">0</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="leaderboard">
+    <h2>🏅 Top 10 Performers 🏅</h2>
+    <ol id="top10"></ol>
+</div>
+
+<div class="spotlight">
+    <h3>✨ Community Spotlight ✨</h3>
+    <p>Join 3400+ members who are already earning daily. Zero investment, unlimited potential. Your journey starts now!</p>
+</div>
+
+<div class="footer">
+    <p>© 2026 Digital Earner · All rights reserved</p>
+</div>
+<script type="module" src="../js/performer.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digital Earners</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body class="loaded">
+
+<div class="overlay" id="overlay" onclick="closeMenuOnly()"></div>
+
+<div class="side-menu" id="sideMenu">
+
+<button class="close-btn" onclick="closeMenuOnly()">✕</button>
+
+<div class="side-header">
+    <div class="side-title">Digital Earners</div>
+    <div class="support-email">📧 digitalearner.business@gmail.com</div>
+    <div class="support-wa" onclick="window.open('https://wa.me/918272848772','_blank')">📞 +91 82728 48772</div>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('../index.html')">🏠 Home</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('about.html')">📖 About Us</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('help.html')">📞 Contact Us</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="goPage('how-it-works.html')">❓ How It Works</span>
+</div>
+
+<div class="menu-box">
+<span class="menu-text" onclick="showLogout()">🚪 Logout</span>
+</div>
+
+</div>
+
+<div class="logout-popup" id="logoutPopup">
+<div class="popup-box">
+
+<div class="popup-title">Confirm Logout</div>
+<div class="popup-text">Are you sure you want to log out?</div>
+
+<div class="popup-buttons">
+<button class="yes-btn" onclick="confirmLogout()">Yes</button>
+<button class="no-btn" onclick="closeLogout()">No</button>
+</div>
+
+</div>
+</div>
+
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="../images/logo.png" class="logo-img" alt="logo">
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" onclick="openMenuOnly()">☰</button>
+    </div>
+</div>
+
+<div class="welcome-section">
+
+<div>
+<div class="welcome-text">
+Welcome <span class="username-highlight" id="username">User</span> 🤝
+</div>
+
+<div class="sub-text">
+Let's start your greatest earning journey 🚀
+</div>
+</div>
+
+<div>🚀</div>
+
+</div>
+
+<div class="container">
+
+<div class="box" onclick="openPage('my-dashboard.html')">
+<div class="box-emoji">📊</div>
+<div class="box-title">My Dashboard</div>
+<div class="box-sub">View your stats</div>
+</div>
+
+<div class="box" onclick="openPage('performer.html')">
+<div class="box-emoji">🏆</div>
+<div class="box-title">Top Performer</div>
+<div class="box-sub">Meet top earners</div>
+</div>
+
+<div class="box" onclick="openPage('earn.html')">
+<div class="box-emoji">💰</div>
+<div class="box-title">Let's Earn</div>
+<div class="box-sub">Start earning now</div>
+</div>
+
+<div class="box" onclick="openPage('rewards.html')">
+<div class="box-emoji">🎁</div>
+<div class="box-title">Get Rewards</div>
+<div class="box-sub">Claim your rewards</div>
+</div>
+
+<div class="box" onclick="openPage('help.html')">
+<div class="box-emoji">🆘</div>
+<div class="box-title">Need Help</div>
+<div class="box-sub">24/7 support</div>
+</div>
+
+<div class="box" onclick="openPage('claim.html')">
+<div class="box-emoji">🎁💰</div>
+<div class="box-title">Claim Reward</div>
+<div class="box-sub">Submit proof & get ₹100</div>
+</div>
+
+<div class="box" onclick="openPage('withdraw.html')">
+<div class="box-emoji">💸</div>
+<div class="box-title">Withdraw Fund</div>
+<div class="box-sub">Withdraw your earnings</div>
+</div>
+
+</div>
+
+<div class="footer">
+    © 2026 Digital Earner · All rights reserved
+</div>
+<script type="module" src="../js/dashboard.js"></script>
+</body>
+</html>
