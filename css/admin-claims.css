@@ -1,0 +1,206 @@
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: linear-gradient(135deg, #f3f4f6, #eef2ff); min-height: 100vh; }
+        
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .login-card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 35px;
+            width: 380px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        .login-card h2 { margin-bottom: 10px; color: #1e293b; }
+        .login-card p { margin-bottom: 25px; color: #64748b; font-size: 14px; }
+        .input-group { margin-bottom: 20px; position: relative; }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: 0.2s;
+            background: #f8fafc;
+        }
+        .input-group input:focus { outline: none; border-color: #4f46e5; }
+        .email-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            margin-top: 5px;
+            padding: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: none;
+            border: 1px solid #e2e8f0;
+        }
+        .email-suggestions.show { display: block; }
+        .suggestion-item {
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #1a237e;
+            font-weight: 500;
+        }
+        .suggestion-item:hover { background: #f1f5f9; }
+        .remember-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .remember-group input { width: 18px; height: 18px; margin: 0; }
+        .remember-group label { font-size: 14px; color: #334155; cursor: pointer; }
+        .login-btn {
+            width: 100%;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-btn:hover { background: #4338ca; }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .error { color: #ef4444; margin-top: 10px; font-size: 13px; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid white; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; margin-right: 6px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        .admin-container { max-width: 900px; margin: 20px auto; padding: 15px 20px; }
+        .admin-title { font-size: 28px; font-weight: 800; color: #1e293b; margin-bottom: 20px; text-align: center; }
+        .summary-card { background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 20px; padding: 20px; margin-bottom: 25px; color: white; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .summary-item { text-align: center; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 16px; }
+        .summary-label { font-size: 11px; text-transform: uppercase; opacity: 0.7; }
+        .summary-value { font-size: 24px; font-weight: 800; }
+        .summary-value.pending { color: #f59e0b; }
+        .claims-list { display: flex; flex-direction: column; gap: 20px; }
+        .claim-item { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid #f59e0b; }
+        .claim-header { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eef2ff; flex-wrap: wrap; gap: 8px; }
+        .claim-id { font-size: 14px; color: #64748b; }
+        .claim-date { font-size: 12px; color: #94a3b8; }
+        .status-badge { background: #fef3c7; color: #d97706; padding: 4px 12px; border-radius: 30px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .section-title { font-size: 14px; font-weight: 800; margin: 10px 0 8px 0; }
+        .section-title.claimant { color: #4f46e5; border-left: 3px solid #4f46e5; padding-left: 8px; }
+        .section-title.referred { color: #f59e0b; border-left: 3px solid #f59e0b; padding-left: 8px; margin-top: 15px; }
+        .details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #f8fafc; border-radius: 16px; padding: 12px; }
+        .detail-item { display: flex; flex-direction: column; }
+        .detail-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .detail-value { font-size: 14px; font-weight: 600; color: #1e293b; word-break: break-all; }
+        .screenshot-link { display: inline-block; margin-top: 12px; padding: 8px 16px; background: #e0e5ec; border-radius: 30px; font-size: 12px; color: #4f46e5; text-decoration: none; }
+        .action-buttons { display: flex; gap: 12px; margin-top: 18px; }
+        .approve-btn { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+        .reject-btn { background: #ef4444; color: white; border: none; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; }
+        .no-claims { text-align: center; padding: 50px; color: #64748b; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; float: right; margin-bottom: 20px; font-weight: 600; }
+        .clearfix::after { content: ""; clear: both; display: table; }
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; margin-right: 6px; }
+        .toast-message { position: fixed; bottom: 30px; left: 20px; right: 20px; background: #1e293b; color: white; padding: 14px 20px; border-radius: 50px; font-size: 14px; text-align: center; z-index: 3000; display: none; }
+        .toast-message.success { background: #10b981; }
+        .toast-message.error { background: #ef4444; }
+        
+        /* ==========================================================================
+   एडमिन पैनल को कंप्यूटर/डेस्कटॉप स्क्रीन पर प्रोफेशनल सॉफ्टवेयर बनाने के लिए
+   ========================================================================== */
+@media (min-width: 992px) {
+    /* कंटेनर की चौड़ाई को बड़ी स्क्रीन के हिसाब से बढ़ाया */
+    .admin-container {
+        max-width: 1200px !important;
+        padding: 30px 20px !important;
+    }
+
+    /* मुख्य टाइटल को लेफ्ट अलाइन और थोड़ा अट्रैक्टिव किया */
+    .admin-title {
+        text-align: left !important;
+        font-size: 32px !important;
+        margin-bottom: 30px !important;
+        display: inline-block;
+    }
+
+    /* लॉगआउट बटन को टाइटल के साथ परफेक्टली अलाइन करने के लिए */
+    .logout-btn {
+        margin-top: 5px !important;
+        padding: 10px 25px !important;
+        transition: all 0.3s ease;
+    }
+    .logout-btn:hover {
+        background: #dc2626 !important;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+
+    /* समरी ग्रिड को 3-कॉलम फिक्स्ड लेआउट में बदला ताकि ये खींचे नहीं */
+    .summary-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 25px !important;
+    }
+    
+    .summary-item {
+        padding: 20px !important;
+    }
+    
+    .summary-value {
+        font-size: 32px !important;
+    }
+
+    /* क्लेम लिस्ट को 2-कॉलम ग्रिड में बदला - यानी कंप्यूटर पर दो क्लेम आमने-सामने दिखेंगे! */
+    .claims-list {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 25px !important;
+    }
+
+    /* हर क्लेम कार्ड को और मजबूत और प्रीमियम लुक दिया */
+    .claim-item {
+        margin: 0 !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease !important;
+    }
+    
+    .claim-item:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 25px rgba(0,0,0,0.12) !important;
+    }
+
+    /* डिटेल्स ग्रिड को बड़ी स्क्रीन पर 2-कॉलम रखा ताकि डेटा साफ-साफ दिखे */
+    .details-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 15px !important;
+        padding: 15px !important;
+    }
+
+    /* बटन्स के ऊपर होवर इफेक्ट्स जोड़े ताकि वो रिस्पॉन्सिव लगें */
+    .approve-btn, .reject-btn {
+        padding: 12px 24px !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .approve-btn:hover {
+        background: #059669 !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    .reject-btn:hover {
+        background: #dc2626 !important;
+        box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+}
