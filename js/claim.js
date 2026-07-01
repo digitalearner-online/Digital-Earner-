@@ -342,7 +342,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     p_referred_mobile: referredMobile,
     p_broker_name: broker,
     p_request_id: String(claimId),
-    p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/admin-claims.html'
+    p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/html/admin-claims.html'
 });
             } catch (notifyErr) {
                 console.error("Database Notification exception:", notifyErr);
