@@ -333,16 +333,17 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
             
             try {
                 await supabase.rpc('send_telegram_notification_real', {
-                    p_user_name: claimantName,
-                    p_user_email: claimantEmail,
-                    p_user_mobile: claimantMobile,
-                    p_referred_name: referredName,
-                    p_referred_email: referredEmail,
-                    p_referred_mobile: referredMobile,
-                    p_broker_name: broker,
-                    p_request_id: String(claimId),
-                    p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/admin-claims.html'
-                });
+    p_type: 'new_claim',
+    p_user_name: claimantName,
+    p_user_email: claimantEmail,
+    p_user_mobile: claimantMobile,
+    p_referred_name: referredName,
+    p_referred_email: referredEmail,
+    p_referred_mobile: referredMobile,
+    p_broker_name: broker,
+    p_request_id: String(claimId),
+    p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/admin-claims.html'
+});
             } catch (notifyErr) {
                 console.error("Database Notification exception:", notifyErr);
             }
