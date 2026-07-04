@@ -26,7 +26,8 @@ import { getSession } from "./auth.js";
     async function loadWithdrawData() {
         if (!sessionUser) return
 
-        const userId = sessionUser.id
+        const { data: { user } } = await supabase.auth.getUser();
+const userId = user.id;
         
         const { data: earnings } = await supabase
             .from('user_earnings')
