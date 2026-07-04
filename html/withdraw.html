@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Withdraw - Digital Earner</title>
+    <link rel="icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/withdraw.css">
+</head>
+<body>
+
+<div id="loading"><div class="loader"><div></div></div></div>
+<div class="overlay" id="overlay"></div>
+
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box"><span class="digital-title">Digital Earner</span><button class="close-btn" id="closeMenuBtn">✕</button></div>
+        <div class="menu-box" id="backToDashboard"><span class="menu-link">← Back</span></div>
+        <div class="menu-box"><a href="index.html" class="menu-link">🏠 Home</a></div>
+        <div class="menu-box"><a href="about.html" class="menu-link">📖 About Us</a></div>
+        <div class="menu-box"><a href="help.html" class="menu-link">📞 Contact Us</a></div>
+        <div class="menu-box"><a href="how-it-works.html" class="menu-link">❓ How It Works</a></div>
+    </div>
+</div>
+
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left"><img src="logo.png" alt="Logo" class="logo-img"><span class="brand-text">Digital Earner</span></div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Balance Card -->
+    <div class="balance-card">
+        <div class="balance-label">💰 Available Balance</div>
+        <div class="balance-amount">₹<span id="walletBalance">0</span></div>
+        <div class="balance-sub">Total withdrawn: ₹<span id="totalWithdrawn">0</span></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+        <div class="stat-box"><div class="stat-number pending" id="pendingCount">0</div><div class="stat-label">Pending</div></div>
+        <div class="stat-box"><div class="stat-number approved" id="approvedCount">0</div><div class="stat-label">Approved</div></div>
+        <div class="stat-box"><div class="stat-number rejected" id="rejectedCount">0</div><div class="stat-label">Rejected</div></div>
+    </div>
+
+    <!-- Withdraw Form -->
+    <div class="withdraw-card">
+        <div class="withdraw-title"><i class="fa-regular fa-circle-down"></i> Request Withdrawal</div>
+        <div class="form-group">
+            <label>Amount (₹)</label>
+            <input type="number" id="withdrawAmount" placeholder="Enter amount" min="1">
+        </div>
+        <div class="form-group">
+            <label>UPI ID</label>
+            <input type="text" id="upiId" placeholder="your@upi or phone number">
+        </div>
+        <button class="btn-withdraw" id="withdrawBtn" onclick="submitWithdraw()">Withdraw Now</button>
+    </div>
+
+    <!-- History -->
+    <div class="history-card">
+        <div class="history-title"><i class="fa-regular fa-clock-rotate-left"></i> Withdrawal History</div>
+        <div id="historyList"><p style="color:#94a3b8; font-size:13px; text-align:center;">No withdrawals yet</p></div>
+    </div>
+
+    <div class="footer">© 2026 Digital Earner · All rights reserved</div>
+</div>
+
+<div id="toastMessage" class="toast-message"></div>
+<script type="module" src="../js/withdraw.js"></script>
+</body>
+</html>
