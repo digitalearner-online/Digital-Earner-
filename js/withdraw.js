@@ -26,8 +26,7 @@ import { getSession } from "./auth.js";
     async function loadWithdrawData() {
         if (!sessionUser) return
 
-        const { data: { user } } = await supabase.auth.getUser();
-const userId = user.id;
+        const userId = sessionUser.id;
         
         const { data: earnings } = await supabase
             .from('user_earnings')
@@ -197,4 +196,16 @@ btn.innerHTML = 'Withdraw Now';
     if (menuBtn) menuBtn.addEventListener('click', openMenuOnly)
     if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenuOnly)
     if (overlay) overlay.addEventListener('click', closeMenuOnly)
+    async function init() {
+    document.getElementById('loading').style.display = 'flex';
+    
+    const session = await protectPage();
+    if (session) {
+        await loadWithdrawData();
+    }
+    
+    document.getElementById('loading').style.display = 'none';
+}
+
+init();
     document.getElementById('backToDashboard').addEventListener('click', () => window.location.href = 'dashboard.html')
