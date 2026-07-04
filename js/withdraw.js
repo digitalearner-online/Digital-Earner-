@@ -28,16 +28,19 @@ import { getSession } from "./auth.js";
 
         const userId = sessionUser.id;
         
-        const { data: earnings } = await supabase
-            .from('user_earnings')
-            .select('wallet_balance')
-            .eq('user_id', userId)
-            .single()
+        const { data: earnings, error } = await supabase
+    .from('user_earnings')
+    .select('wallet_balance')
+    .eq('user_id', userId)
+    .single();
 
-        if (earnings) {
-            document.getElementById('walletBalance').innerText = earnings.wallet_balance || 0
-        }
+alert("User ID: " + userId);
+alert("Earnings: " + JSON.stringify(earnings));
+alert("Error: " + JSON.stringify(error));
 
+if (earnings) {
+    document.getElementById('walletBalance').innerText = earnings.wallet_balance || 0;
+}
         // Withdrawal stats
         const { data: requests } = await supabase
             .from('withdrawal_requests')
