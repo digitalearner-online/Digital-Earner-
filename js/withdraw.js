@@ -1,6 +1,6 @@
 
     import { supabase } from "./supabase.auth.js";
-import { getSession } from "./oauth.js";
+import { getSession } from "./auth.js";
 
     let sessionUser = null
 
@@ -164,6 +164,31 @@ const { error: telegramError } = await supabase.rpc(
 
 if (telegramError) {
     console.error('Telegram Error:', telegramError);
+}
+const { error: walletError } = await supabase
+    .from('user_earnings')
+    .update({
+        wallet_balance: walletBalance - amount
+    })
+    .eq('user_id', sessionUser.id);
+
+if (walletError) {
+    throw walletError;
+}
+
+showToast('✅ Withdrawal request submitted!', 'success');
+
+document.getElementById('withdrawAmount').value = '';
+document.getElementById('upiId').value = '';
+
+await loadWithdrawData();
+
+} catch (err) {
+    showToast('❌ ' + err.message, 'error');
+}
+
+btn.disabled = false;
+btn.innerHTML = 'Withdraw Now';
 }
     const menu = document.getElementById('menu'), overlay = document.getElementById('overlay'), menuBtn = document.getElementById('menuBtn'), closeMenuBtn = document.getElementById('closeMenuBtn')
     function openMenuOnly() { menu.classList.add('active'); overlay.classList.add('active'); document.body.classList.add('menu-open'); document.body.style.top = `-${window.scrollY}px` }
