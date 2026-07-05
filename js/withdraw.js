@@ -33,14 +33,10 @@ import { getSession } from "./auth.js";
     .select('wallet_balance')
     .eq('user_id', userId)
     .single();
-
-alert("User ID: " + userId);
-alert("Earnings: " + JSON.stringify(earnings));
-alert("Error: " + JSON.stringify(error));
-
 if (earnings) {
     document.getElementById('walletBalance').innerText = earnings.wallet_balance || 0;
 }
+
         // Withdrawal stats
         const { data: requests } = await supabase
             .from('withdrawal_requests')
@@ -136,12 +132,15 @@ const walletBalance = Number(earnings?.wallet_balance || 0);
             const { data: insertedRequest, error: insertError } = await supabase
     .from('withdrawal_requests')
     .insert({
-        user_id: sessionUser.id,
-        amount: amount,
-        upi_id: upi,
-        status: 'pending',
-        requested_at: new Date().toISOString()
-    })
+    user_id: sessionUser.id,
+    full_name: user.user_metadata?.full_name || "User",
+    email: user.email || "",
+    mobile: user.user_metadata?.mobile || "",
+    amount: amount,
+    upi_id: upi,
+    status: 'pending',
+    requested_at: new Date().toISOString()
+})
     .select()
     .single()
 
@@ -161,7 +160,7 @@ const { error: telegramError } = await supabase.rpc(
         p_amount: amount,
         p_upi_id: upi,
         p_request_id: insertedRequest.id.toString(),
-        p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/html/admin-withdraw.html'
+       p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/html/admin-withdraw.html'
     }
 );
 

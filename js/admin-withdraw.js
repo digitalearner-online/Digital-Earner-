@@ -58,7 +58,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
             .from('withdrawal_requests')
             .select('*')
             .order('requested_at', { ascending: false })
-            .order('requested_at', { ascending: false })
+        
         
         const container = document.getElementById('requestsList')
         if (!data || data.length === 0) {
@@ -76,10 +76,35 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
                         <span class="status-badge status-${req.status}">${req.status.toUpperCase()}</span>
                     </div>
                     <div class="request-details">
-                        <div class="detail-item"><span class="detail-label">User ID</span><span class="detail-value">${escapeHtml(req.user_id)}</span></div>
-                        <div class="detail-item"><span class="detail-label">Amount</span><span class="detail-value">₹${req.amount}</span></div>
-                        <div class="detail-item"><span class="detail-label">UPI ID</span><span class="detail-value">${escapeHtml(req.upi_id)}</span></div>
-                    </div>
+                       <div class="detail-item">
+    <span class="detail-label">Name</span>
+    <span class="detail-value">${escapeHtml(req.full_name)}</span>
+</div>
+
+<div class="detail-item">
+    <span class="detail-label">Email</span>
+    <span class="detail-value">${escapeHtml(req.email)}</span>
+</div>
+
+<div class="detail-item">
+    <span class="detail-label">Mobile</span>
+    <span class="detail-value">${escapeHtml(req.mobile)}</span>
+</div>
+
+<div class="detail-item">
+    <span class="detail-label">User ID</span>
+    <span class="detail-value">${escapeHtml(req.user_id)}</span>
+</div>
+
+<div class="detail-item">
+    <span class="detail-label">Amount</span>
+    <span class="detail-value">₹${req.amount}</span>
+</div>
+
+<div class="detail-item">
+    <span class="detail-label">UPI ID</span>
+    <span class="detail-value">${escapeHtml(req.upi_id)}</span>
+</div>
             `
             if (req.status === 'pending') {
                 html += `<div class="action-buttons">
@@ -101,20 +126,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
         if (rejectBtn) rejectBtn.disabled = true
         
         try {
-        const { data: earn } = await supabase
-    .from('user_earnings')
-    .select('wallet_balance')
-    .eq('user_id', userId)
-    .single();
-
-if (earn) {
-    await supabase
-        .from('user_earnings')
-        .update({
-            wallet_balance: Math.max((earn.wallet_balance || 0) - amount, 0)
-        })
-        .eq('user_id', userId);
-}
+        
             await supabase
                 .from('withdrawal_requests')
                 .update({ status: 'approved', processed_at: new Date().toISOString() })
