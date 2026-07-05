@@ -161,7 +161,7 @@ const { error: telegramError } = await supabase.rpc(
         p_amount: amount,
         p_upi_id: upi,
         p_request_id: insertedRequest.id.toString(),
-        p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner/html/admin-withdraw.html'
+        p_manage_link: 'https://digitalearner-online.github.io/Digital-Earner-/html/admin-withdraw.html'
     }
 );
 
