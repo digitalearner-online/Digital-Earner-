@@ -129,6 +129,11 @@ const walletBalance = Number(earnings?.wallet_balance || 0);
     btn.innerHTML = 'Withdraw Now';
     return;
 }
+const { data: { user } } = await supabase.auth.getUser();
+
+if (!user) {
+    throw new Error("User not found");
+}
             const { data: insertedRequest, error: insertError } = await supabase
     .from('withdrawal_requests')
     .insert({
@@ -147,8 +152,6 @@ const walletBalance = Number(earnings?.wallet_balance || 0);
             if (insertError) {
     throw new Error(insertError.message)
 }
-
-const { data: { user } } = await supabase.auth.getUser();
 
 const { error: telegramError } = await supabase.rpc(
     'send_withdrawal_telegram_notification',
