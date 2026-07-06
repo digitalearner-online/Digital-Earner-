@@ -54,10 +54,13 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     }
     
     async function loadRequests() {
-        const { data } = await supabase
-            .from('withdrawal_requests')
-            .select('*')
-            .order('requested_at', { ascending: false })
+        const { data, error } = await supabase
+    .from('withdrawal_requests')
+    .select('*')
+    .order('requested_at', { ascending: false });
+
+console.log("DATA:", data);
+console.log("ERROR:", error);
         
         
         const container = document.getElementById('requestsList')
@@ -105,7 +108,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     <span class="detail-label">UPI ID</span>
     <span class="detail-value">${escapeHtml(req.upi_id)}</span>
 </div>
-            `
+</div>
+`
             if (req.status === 'pending') {
                 html += `<div class="action-buttons">
                             <button class="approve-btn" onclick="approveWithdrawal('${req.id}', '${req.user_id}', ${req.amount})">✅ Approve</button>
