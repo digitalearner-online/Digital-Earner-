@@ -189,6 +189,8 @@ document.getElementById('upiId').value = '';
 await loadWithdrawData();
 
 } catch (err) {
+    console.error(err);
+    alert(err.stack);
     showToast('❌ ' + err.message, 'error');
 }
 
