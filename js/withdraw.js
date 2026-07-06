@@ -193,7 +193,6 @@ await loadWithdrawData();
     alert(err.stack);
     showToast('❌ ' + err.message, 'error');
 }
-
 btn.disabled = false;
 btn.innerHTML = 'Withdraw Now';
 }
