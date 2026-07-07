@@ -107,6 +107,10 @@ import { getSession } from "./auth.js";
     
     async function loadDashboard() {
         if (!sessionUser) return
+        // Auto reset earnings if needed
+await supabase.rpc("reset_user_earnings_if_needed", {
+    p_user_id: sessionUser.id
+});
         document.getElementById('uName').textContent = sessionUser.user_metadata?.full_name || sessionUser.email.split('@')[0]
         document.getElementById('uEmail').textContent = sessionUser.email
         
@@ -140,6 +144,7 @@ import { getSession } from "./auth.js";
             animateNumber(document.getElementById('earnMonth'), wallet.month_earnings || 0)
             animateNumber(document.getElementById('earnTotal'), wallet.total_earnings || 0)
         }
+        animateNumber(document.getElementById('walletBalance'), wallet.wallet_balance || 0)
         
         const lockKey = `claim_lock_${sessionUser.id}`
         const lockData = localStorage.getItem(lockKey)

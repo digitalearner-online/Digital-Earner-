@@ -37,17 +37,17 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
         const { data } = await supabase.from('withdrawal_requests').select('status, amount')
         if (data) {
             let pending = 0, approved = 0, rejected = 0
-            data.forEach(d => {
-                if (d.status === 'pending') pending += d.amount
-                else if (d.status === 'approved') approved += d.amount
-                else if (d.status === 'rejected') rejected += d.amount
-            })
-            document.getElementById('pendingAmount').innerHTML = '₹' + pending
-            document.getElementById('approvedAmount').innerHTML = '₹' + approved
-            document.getElementById('rejectedAmount').innerHTML = '₹' + rejected
-        }
-    }
-    
+
+data.forEach(d => {
+    if (d.status === 'pending') pending++
+    else if (d.status === 'approved') approved++
+    else if (d.status === 'rejected') rejected++
+})
+            document.getElementById('pendingAmount').innerHTML = pending
+document.getElementById('approvedAmount').innerHTML = approved
+document.getElementById('rejectedAmount').innerHTML = rejected
+}
+} 
     function escapeHtml(str) {
         if (!str) return '—'
         return str.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))
@@ -58,9 +58,6 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     .from('withdrawal_requests')
     .select('*')
     .order('requested_at', { ascending: false });
-
-console.log("DATA:", data);
-console.log("ERROR:", error);
         
         
         const container = document.getElementById('requestsList')
@@ -140,8 +137,7 @@ console.log("ERROR:", error);
     .eq('id', id);
 
 if (error) {
-    console.error(error);
-    alert(error.message);
+    showToast("❌ Failed to approve withdrawal", "error");
     return;
 }
 

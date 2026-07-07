@@ -299,7 +299,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
                         success_count: (existing.success_count || 0) + 1,
                         airpods_progress: Math.min((existing.airpods_progress || 0) + 1, 20),
                         pending_count: Math.max((existing.pending_count || 1) - 1, 0),
-                        updated_at: new Date().toISOString()
+                        updated_at: new Date().toISOString(),
+    last_success_at: new Date().toISOString()
                     })
                     .eq('user_id', userId)
             } else {
@@ -316,7 +317,8 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
                         pending_count: 0,
                         rejected_count: 0,
                         airpods_progress: 1,
-                        updated_at: new Date().toISOString()
+                        updated_at: new Date().toISOString(),
+    last_success_at: new Date().toISOString()
                     })
             }
             
