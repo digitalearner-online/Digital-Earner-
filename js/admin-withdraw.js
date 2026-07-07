@@ -131,11 +131,24 @@ console.log("ERROR:", error);
         
         try {
         
-            await supabase
-                .from('withdrawal_requests')
-                .update({ status: 'approved', processed_at: new Date().toISOString() })
-                .eq('id', id)
-            
+            const { error } = await supabase
+    .from('withdrawal_requests')
+    .update({
+        status: 'approved',
+        processed_at: new Date().toISOString()
+    })
+    .eq('id', id);
+
+if (error) {
+    console.error(error);
+    alert(error.message);
+    return;
+}
+
+const req = document.getElementById(`req-${id}`);
+if (req) {
+    req.remove();
+}
             showToast(`✅ Withdrawal of ₹${amount} approved!`, 'success')
             await loadSummary()
             await loadRequests()
