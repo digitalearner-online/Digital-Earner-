@@ -46,11 +46,31 @@
             <div class="stat-card reject"><div class="stat-number reject" id="rCount">0</div><div class="stat-label reject">REJECTED</div><div class="stat-sub">Declined</div></div>
         </div>
     </div>
-
+    
     <div class="earning-card"><div class="card-header"><div class="card-title">📅 Today earning</div></div><div class="card-amount"><span>₹</span><span id="earnToday">0</span></div></div>
     <div class="earning-card"><div class="card-header"><div class="card-title">📊 Last 7 day earning</div></div><div class="card-amount"><span>₹</span><span id="earnWeek">0</span></div></div>
     <div class="earning-card"><div class="card-header"><div class="card-title">📆 Last month earning</div></div><div class="card-amount"><span>₹</span><span id="earnMonth">0</span></div></div>
     <div class="earning-card"><div class="card-header"><div class="card-title">🏆 All time earning</div></div><div class="card-amount"><span>₹</span><span id="earnTotal">0</span></div></div>
+
+<div class="wallet-card">
+    <div class="wallet-top">
+        <div>
+            <div class="wallet-title">💰 Wallet Balance</div>
+            <div class="wallet-status">Available to Withdraw</div>
+        </div>
+
+        <div class="wallet-icon">💳</div>
+    </div>
+
+    <div class="wallet-amount">
+        ₹<span id="walletBalance">0</span>
+    </div>
+
+    <button class="wallet-btn"
+        onclick="window.location.href='withdraw.html'">
+        💸 Withdraw Now
+    </button>
+</div>
 
     <div class="airpods-single-box">
         <div class="airpods-left">
