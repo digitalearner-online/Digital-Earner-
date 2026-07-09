@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Rewards - Digital Earner</title>
+    <link rel="icon" href="../images/logo.png" />
+    <link rel="stylesheet" href="../css/rewards.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+<!-- ===== LOADING ===== -->
+<div id="loading"><div class="loader"><div></div></div></div>
+
+<!-- ===== OVERLAY ===== -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ===== MENU ===== -->
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box">
+            <span class="digital-title">Digital Earner</span>
+            <button class="close-btn" onclick="closeMenuOnly()">✕</button>
+        </div>
+        <div class="menu-box" onclick="goToDashboard()">
+            <span class="menu-link">← Back</span>
+        </div>
+        <div class="menu-box">
+            <a href="../index.html" class="menu-link">🏠 Home</a>
+        </div>
+        <div class="menu-box">
+            <a href="about.html" class="menu-link">📖 About Us</a>
+        </div>
+        <div class="menu-box">
+            <a href="help.html" class="menu-link">📞 Contact Us</a>
+        </div>
+        <div class="menu-box">
+            <a href="how-it-works.html" class="menu-link">❓ How It Works</a>
+        </div>
+    </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="../images/img.png" alt="Logo" class="logo-img" />
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" onclick="openMenuOnly()">☰</button>
+    </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="container">
+    <h1 class="main-title">🎁 Rewards</h1>
+
+    <div class="sub-note">
+        <i class="fa-regular fa-clock"></i>
+        <strong>⏳ Complete tasks within the current month.</strong> Progress resets on the 1st day of every month. Rewards issued after verification.
+    </div>
+
+    <div class="progress-card">
+        <div class="progress-header">
+            <span class="progress-label"><i class="fa-regular fa-star"></i> Monthly Progress</span>
+            <span class="progress-count" id="progressCount">0 / 100</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill" style="width: 0%;"></div>
+        </div>
+    </div>
+
+    <div class="reward-grid" id="rewardGrid"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <p>© 2026 Digital Earner · All rights reserved</p>
+    </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toastMessage" class="toast-message"></div>
+
+<script type="module" src="../js/rewards.js"></script>
+</body>
+</html>

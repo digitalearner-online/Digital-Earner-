@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>How It Works - Digital Earner</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f3f4f6, #eef2ff);
+    touch-action: manipulation;
+}
+
+/* 🔴 NEW ANIMATION - FADE SLIDE UP (PROFESSIONAL) */
+@keyframes fadeSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    animation: fadeSlideUp 1s ease-out;
+}
+
+/* 🔴 MENU FIX - BACKGROUND LOCK */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== Header - Index Jaisa ===== */
+.header-container {
+    position: relative;
+    width: 100%;
+}
+
+.header-bg {
+    background: #e0e5ec;
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    height: 70px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: -10px;
+    left: -10px;
+}
+
+.brand-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1e40af;
+    text-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+    white-space: nowrap;
+    position: relative;
+    top: -7px;
+    left: -15px;
+}
+
+.menu-btn {
+    width: 40px;
+    height: 40px;
+    background: #e0e5ec;
+    border: none;
+    border-radius: 10px;
+    color: #4f46e5;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: -7px;
+    right: -8px;
+    z-index: 3;
+    padding: 0;
+}
+
+.menu-btn:active {
+    box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+}
+
+/* ===== Side Menu - Index Jaisa ===== */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 999;
+    /* 🔴 OVERLAY FIX - NO CLICK */
+    pointer-events: none;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+    /* 🔴 ACTIVE HONE PAR BHI CLICK NAHI HOGA */
+    pointer-events: none;
+}
+
+.menu-container {
+    position: fixed;
+    top: 0%;
+    right: -350px;
+    width: 280px;
+    background: #e0e5ec;
+    transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    padding: 20px 15px;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 25px 0 0 25px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.menu-container.active {
+    right: 0;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-box {
+    background: #e0e5ec;
+    border-radius: 12px;
+    padding: 10px 15px;
+    box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+    transition: 0.3s;
+}
+
+.menu-box.digital-box {
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.digital-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e67e22;
+    text-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
+    white-space: nowrap;
+}
+
+.close-btn {
+    width: 36px;
+    height: 36px;
+    background: #e0e5ec;
+    border: none;
+    border-radius: 10px;
+    color: #ef4444;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.close-btn:active {
+    box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+}
+
+.menu-link {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+    text-decoration: none;
+    padding: 8px 5px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.menu-link:hover {
+    color: #e67e22;
+    padding-left: 15px;
+    background: #f0f3ff;
+}
+
+/* ===== HERO ===== */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.line {
+    width: 90px;
+    height: 5px;
+    background: #6366f1;
+    margin: 12px auto 20px auto;
+    border-radius: 10px;
+}
+
+.hero p {
+    color: #6b7280;
+    font-size: 18px;
+    max-width: 500px;
+    margin: auto;
+    line-height: 1.6;
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(14px);
+    border-radius: 22px;
+    margin: 30px 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all .8s ease;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.number {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 60px;
+    color: #e5e7eb;
+    font-weight: 900;
+}
+
+.card p {
+    margin-top: 15px;
+    color: #6b7280;
+}
+
+.list {
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 17px;
+}
+
+.check {
+    color: #22c55e;
+    font-size: 20px;
+    margin-right: 12px;
+}
+
+/* ===== LEARN MORE BUTTON ===== */
+.learn-more {
+    text-align: center;
+    padding: 70px 20px;
+}
+
+.learn-more h2 {
+    color: #2563eb;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.learn-more p {
+    color: #6b7280;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+.details-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(90deg, #2563eb, #4f46e5);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: .4s;
+    border: none;
+}
+
+.details-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(79,70,229,.4);
+}
+
+/* ===== NEW POPUP WITH FULL DETAILS ===== */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    z-index: 2001;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.popup-container.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.popup-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.popup-close {
+    width: 40px;
+    height: 40px;
+    background: #fee2e2;
+    border: none;
+    border-radius: 12px;
+    color: #ef4444;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.popup-close:hover {
+    background: #fecaca;
+    transform: rotate(90deg);
+}
+
+.popup-content {
+    padding: 25px;
+    max-height: 70vh;
+    overflow-y: auto;
+    line-height: 1.8;
+    color: #334155;
+}
+
+.popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 10px;
+}
+
+.popup-content h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 25px 0 15px;
+}
+
+.popup-content p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.popup-content .step-list {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.popup-content .step-list li {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.popup-content .feature-list {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.popup-content .feature-list li {
+    margin-bottom: 12px;
+    padding-left: 30px;
+    position: relative;
+    font-size: 16px;
+}
+
+.popup-content .feature-list li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-size: 18px;
+}
+
+.founder-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px dashed #e2e8f0;
+    text-align: center;
+}
+
+.founder-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 5px;
+}
+
+.founder-title {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.join-text {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+}
+
+/* ===== START EARNING SECTION ===== */
+.start-earning-section {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    color: white;
+}
+
+.start-earning-section h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.start-earning-section p {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.start-btn {
+    display: inline-block;
+    padding: 18px 50px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2563eb;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    transition: all 0.4s;
+    border: none;
+    text-decoration: none;
+}
+
+.start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+.footer h2 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    font-weight: 800;
+    color: white;
+}
+
+.footer .tagline {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto 50px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.footer .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 40px 0 20px;
+    color: #60a5fa;
+    position: relative;
+    display: inline-block;
+}
+
+.footer .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #60a5fa;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer li {
+    margin: 14px 0;
+    font-size: 17px;
+}
+
+.footer a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #60a5fa;
+    padding-left: 8px;
+}
+
+.footer .bottom {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #334155;
+    font-size: 15px;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Overlay for Side Menu -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Side Menu - Index Jaisa -->
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box">
+            <span class="digital-title">Digital Earner</span>
+            <button class="close-btn" onclick="closeMenuOnly()">✕</button>
+        </div>
+        <div class="menu-box">
+            <a href="index.html" class="menu-link">🏠 Home</a>
+        </div>
+        <div class="menu-box">
+            <a href="login.html" class="menu-link">🔐 Login</a>
+        </div>
+        <div class="menu-box">
+            <a href="register.html" class="menu-link">📝 Register</a>
+        </div>
+        <div class="menu-box">
+            <a href="about.html" class="menu-link">📖 About Us</a>
+        </div>
+        <div class="menu-box">
+            <a href="https://wa.me/917217392800" class="menu-link" target="_blank">📞 Contact</a>
+        </div>
+    </div>
+</div>
+
+<!-- Header - Index Jaisa -->
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" onclick="openMenuOnly()">☰</button>
+    </div>
+</div>
+
+<!-- Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay"></div>
+
+<!-- NEW Popup Container with Full Details -->
+<div class="popup-container" id="popupContainer">
+    <div class="popup-header">
+        <h2>Digital Earner</h2>
+        <button class="popup-close" onclick="closePopupOnly()">✕</button>
+    </div>
+    
+    <div class="popup-content">
+        <p>Digital Earner ek aisi website hai jo aapko bina kisi investment ke paise kamane ka mauka deti hai. Aap sirf apne smartphone se kahi bhi, kabhi bhi kaam kar sakte hain.</p>
+        
+        <h3>🚀 Kaise Kaam Karta Hai?</h3>
+        <ol class="step-list">
+            <li><strong>Register karein</strong> – Bilkul free, koi paise nahi lagte. Aapka account 2 minute mein ban jata hai.</li>
+            <li><strong>Free Training paayein</strong> – Hamari team aapko digital skills sikhayegi. Koi experience nahi chahiye.</li>
+            <li><strong>Kaam shuru karein</strong> – Aasan tasks complete karein aur earn karein. Har task ke paise alag.</li>
+            <li><strong>Payment paayein</strong> – Har 3 din mein direct bank account mein payment. Minimum withdrawal ₹100.</li>
+        </ol>
+        
+        <h3>💡 Features</h3>
+        <ul class="feature-list">
+            <li><strong>Zero Investment</strong> – Start with ₹0, koi hidden charges nahi.</li>
+            <li><strong>Work From Anywhere</strong> – Sirf smartphone chahiye, PC ki zaroorat nahi.</li>
+            <li><strong>Work Anytime</strong> – 24/7 flexible timing, jab chahe tab kaam karein.</li>
+            <li><strong>Free Training</strong> – Experts se sikhein aur earn karein.</li>
+            <li><strong>24/7 Support</strong> – Kabhi bhi madad, WhatsApp pe message karein.</li>
+            <li><strong>Direct Bank Payment</strong> – Har 3 din mein payment, trustworthy platform.</li>
+        </ul>
+        
+        <div class="founder-section">
+            <div class="founder-name">Shadman Rao</div>
+            <div class="founder-title">Founder & CEO, Digital Earner</div>
+        </div>
+        
+        <div class="join-text">
+            Join India's fastest growing community today and start your earning journey with zero investment!<br>
+            <span style="color: #4f46e5; font-size: 20px; font-weight: 700;">3400+ Members Already Joined</span>
+        </div>
+    </div>
+</div>
+
+<section class="hero">
+    <h1>Your Success Journey</h1>
+    <div class="line"></div>
+    <p>Follow a simple proven path designed to help beginners learn, grow and start earning online with confidence.</p>
+</section>
+
+<div class="card">
+    <div class="number">01</div>
+    <h2>Learn Basics</h2>
+    <p>Get started with easy-to-understand lessons that introduce you to the world of online income.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Discover popular online platforms</div>
+        <div class="item"><span class="check">✔</span>Set up your digital workspace quickly</div>
+        <div class="item"><span class="check">✔</span>Complete simple starter activities</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="number">02</div>
+    <h2>Build Skills</h2>
+    <p>Strengthen your abilities with practical training so you can work independently and grow confidently online.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Learn to create engaging content</div>
+        <div class="item"><span class="check">✔</span>Build and expand your online presence</div>
+        <div class="item"><span class="check">✔</span>Master personal branding basics</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="number">03</div>
+    <h2>Earn More</h2>
+    <p>Start applying proven methods to increase your earnings and create stable income sources in the digital space.</p>
+    <div class="list">
+        <div class="item"><span class="check">✔</span>Explore time-saving automation techniques</div>
+        <div class="item"><span class="check">✔</span>Form effective online collaborations</div>
+        <div class="item"><span class="check">✔</span>Develop multiple revenue streams</div>
+    </div>
+</div>
+
+<div class="learn-more">
+    <h2>Want to Learn More <br>About Our Community?</h2>
+    <p>Discover how our members are achieving <br>financial independence through <br>digital skills</p>
+    <button class="details-btn" onclick="openPopupOnly()">View Full Details →</button>
+</div>
+
+<section class="start-earning-section">
+    <h2>Start Your Earning Today</h2>
+    <p>Join thousands of motivated individuals who have already transformed their lives through consistent learning and smart action. Your journey to financial freedom starts here — no prior experience required, just dedication and the right guidance.</p>
+    <a href="index.html" class="start-btn">Start Earning Today</a>
+</section>
+
+<footer class="footer">
+    <h2>Digital Earner</h2>
+    <p class="tagline">Empowering financial freedom through zero-investment online opportunities since 2026.</p>
+
+    <div class="section-title">Quick Links</div>
+    <ul>
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="login.html">🔐 Login</a></li>
+        <li><a href="register.html">📝 Register</a></li>
+        <li><a href="about.html">📖 About</a></li>
+        <li><a href="https://wa.me/917217392800" target="_blank">📞 Contact</a></li>
+        <li><a href="#" onclick="handleExit(); return false;">🚪 Exit</a></li>
+    </ul>
+
+    <div class="bottom">
+        © 2026 Digital Earner. All rights reserved.
+    </div>
+</footer>
+
+<script>
+// 🔴 UPDATED MENU FUNCTIONS - BACKGROUND LOCK + OVERLAY NO-CLICK
+function openMenuOnly() {
+    document.getElementById('menu').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.classList.add('menu-open');
+    
+    // 🔴 SAVE CURRENT SCROLL POSITION
+    document.body.style.top = `-${window.scrollY}px`;
+}
+
+function closeMenuOnly() {
+    document.getElementById('menu').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+    document.body.classList.remove('menu-open');
+    
+    // 🔴 RESTORE SCROLL POSITION
+    const scrollY = document.body.style.top;
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+}
+
+// Popup Functions
+function openPopupOnly() {
+    document.getElementById('popupContainer').classList.add('active');
+    document.getElementById('popupOverlay').classList.add('active');
+    document.body.classList.add('no-scroll');
+}
+
+function closePopupOnly() {
+    document.getElementById('popupContainer').classList.remove('active');
+    document.getElementById('popupOverlay').classList.remove('active');
+    document.body.classList.remove('no-scroll');
+}
+
+// Exit Function
+function handleExit() {
+    if (confirm("Are you sure you want to close this page?")) {
+        window.close();
+    }
+}
+
+// Cards animation
+const cards = document.querySelectorAll(".card");
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+cards.forEach(card => observer.observe(card));
+</script>
+
+</body>
+</html>

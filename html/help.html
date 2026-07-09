@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Help & Support - Digital Earner</title>
+    <link rel="icon" href="logo.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #eef2ff);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            animation: fadeSlideUp 0.8s ease-out;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+        .header-container {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header-bg {
+    background: #e0e5ec;
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    height: 70px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    top: -3px;
+    left: -10px;
+}
+
+.brand-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #1e40af;
+    text-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+    white-space: nowrap;
+    position: relative;
+    top: 0px;
+    left: -15px;
+}
+
+.menu-btn {
+    width: 40px;
+    height: 40px;
+    background: #e0e5ec;
+    border: none;
+    border-radius: 10px;
+    color: #4f46e5;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+    transition: .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 0px;
+    right: -8px;
+    z-index: 3;
+    padding: 0;
+}
+
+.menu-btn:active {
+    box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+}
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            background: #e0e5ec;
+            transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+            padding: 20px 15px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            border-radius: 25px 0 0 25px;
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .menu-container.active {
+            right: 0;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .menu-box {
+            background: #e0e5ec;
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+            transition: 0.3s;
+        }
+
+        .menu-box.digital-box {
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .digital-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e67e22;
+            text-shadow: 2px 2px 4px #a3b1c6, -2px -2px 4px #ffffff;
+            white-space: nowrap;
+        }
+
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            background: #e0e5ec;
+            border: none;
+            border-radius: 10px;
+            color: #ef4444;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 3px 3px 6px #a3b1c6, -3px -3px 6px #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .close-btn:active {
+            box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+        }
+
+        .menu-link {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            text-decoration: none;
+            padding: 8px 5px;
+            border-radius: 6px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .menu-link:hover {
+            color: #e67e22;
+            padding-left: 15px;
+            background: #f0f3ff;
+        }
+
+        .help-container {
+            max-width: 450px;
+            margin: 20px auto;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .support-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 28px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08);
+            border-left: 5px solid #4f46e5;
+            transition: all 0.3s ease;
+        }
+
+        .support-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .support-btn {
+            background: #e0e5ec;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 20px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4f46e5;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .support-btn:active {
+            box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        }
+
+        .feedback-form {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 28px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.08);
+            border-left: 5px solid #f59e0b;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: none;
+            border-radius: 18px;
+            font-size: 14px;
+            background: #e0e5ec;
+            box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff;
+            transition: 0.3s;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            box-shadow: inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            border: none;
+            border-radius: 30px;
+            padding: 14px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+            box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px #ffffff;
+        }
+
+        .success-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            display: none;
+        }
+
+        .footer {
+            background: #0f172a;
+            color: #e2e8f0;
+            text-align: center;
+            padding: 18px 20px;
+            margin-top: 30px;
+            font-size: 12px;
+        }
+
+        .issue-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .issue-tag {
+            background: #eef2ff;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #4f46e5;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .issue-tag:hover {
+            background: #4f46e5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="menu-container" id="menu">
+    <div class="menu-items">
+        <div class="menu-box digital-box">
+            <span class="digital-title">Digital Earner</span>
+            <button class="close-btn" id="closeMenuBtn">✕</button>
+        </div>
+        <div class="menu-box" id="backToDashboard">
+            <span class="menu-link">← Back</span>
+        </div>
+        <div class="menu-box">
+            <a href="index.html" class="menu-link">🏠 Home</a>
+        </div>
+        <div class="menu-box">
+            <a href="about.html" class="menu-link">📖 About Us</a>
+        </div>
+        <div class="menu-box">
+            <a href="help.html" class="menu-link">📞 Contact Us</a>
+        </div>
+        <div class="menu-box">
+            <a href="how-it-works.html" class="menu-link">❓ How It Works</a>
+        </div>
+    </div>
+</div>
+
+<div class="header-container">
+    <div class="header-bg"></div>
+    <div class="header-content">
+        <div class="header-left">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span class="brand-text">Digital Earner</span>
+        </div>
+        <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+</div>
+
+<div class="help-container">
+    
+    <div class="support-card">
+        <div class="card-icon">📧</div>
+        <div class="card-title">Email Support</div>
+        <div class="card-desc">Send your query via email. We'll respond within 24 hours.</div>
+        <button class="support-btn" onclick="openEmail()">
+            📧 Send Email → digitalearner.business@gmail.com
+        </button>
+    </div>
+    
+    <div class="support-card">
+        <div class="card-icon">💬</div>
+        <div class="card-title">WhatsApp Support</div>
+        <div class="card-desc">Get instant help on WhatsApp. Quick response from our team.</div>
+        <button class="support-btn" onclick="openWhatsApp()">
+            💬 Chat on WhatsApp → +91 82728 48772
+        </button>
+    </div>
+    
+    <div class="support-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, #e1306c, #c13584);">📸</div>
+        <div class="card-title">Instagram Support</div>
+        <div class="card-desc">Follow us on Instagram for updates & support.</div>
+        <button class="support-btn" onclick="openInstagram()">
+            📸 Follow us → @digital.earner73
+        </button>
+    </div>
+    
+    <div class="feedback-form">
+        <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">📝</div>
+        <div class="card-title">Report an Issue / Feedback</div>
+        <div class="card-desc">Help us improve by reporting any issue or sharing your feedback.</div>
+        
+        <div class="issue-list">
+            <span class="issue-tag" onclick="selectIssue('Task count not updating')">📊 Task count issue</span>
+            <span class="issue-tag" onclick="selectIssue('Login problem')">🔐 Login problem</span>
+            <span class="issue-tag" onclick="selectIssue('Earnings not showing')">💰 Earnings issue</span>
+            <span class="issue-tag" onclick="selectIssue('Reward not received')">🎁 Reward issue</span>
+            <span class="issue-tag" onclick="selectIssue('Profile photo issue')">🖼️ Photo issue</span>
+            <span class="issue-tag" onclick="selectIssue('Other issue')">❓ Other</span>
+        </div>
+        
+        <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="userName" placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+            <label>Your Email</label>
+            <input type="email" id="userEmail" placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+            <label>Issue Type</label>
+            <select id="issueType">
+                <option value="Technical Issue">Technical Issue</option>
+                <option value="Task Tracking Issue">Task Tracking Issue</option>
+                <option value="Earning Issue">Earning Issue</option>
+                <option value="Reward Issue">Reward Issue</option>
+                <option value="Account Issue">Account Issue</option>
+                <option value="Feedback/Suggestion">Feedback/Suggestion</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Describe Your Issue / Feedback</label>
+            <textarea id="message" rows="5" placeholder="Please describe your issue or feedback in detail..."></textarea>
+        </div>
+        
+        <button class="submit-btn" onclick="sendFeedbackEmail()">
+            📤 Submit Report / Feedback
+        </button>
+    </div>
+    
+</div>
+
+<div class="success-toast" id="successToast">✓ Email opened! Send to submit.</div>
+
+<div class="footer">
+    © 2026 Digital Earner · All rights reserved
+</div>
+
+<script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+    
+    const supabaseUrl = "https://pxxbwzfxhapbzpznabbe.supabase.co"
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4eGJ3emZ4aGFwYnpwem5hYmJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwNDE4MDAsImV4cCI6MjA5NDYxNzgwMH0.v4QD86JrDeIBvBnRfKaq2xWy1_9IYmcLp61UmtoZdE4"
+    const supabase = createClient(supabaseUrl, supabaseKey)
+    
+    async function loadUserInfo() {
+        const { data } = await supabase.auth.getUser()
+        if (data.user) {
+            const name = data.user.user_metadata?.full_name || data.user.email.split('@')[0]
+            const email = data.user.email
+            document.getElementById('userName').value = name
+            document.getElementById('userEmail').value = email
+        }
+    }
+    
+    window.selectIssue = function(issue) {
+        document.getElementById('issueType').value = 'Other'
+        const msgBox = document.getElementById('message')
+        msgBox.value = issue + ': '
+        msgBox.focus()
+    }
+    
+    window.openEmail = function() {
+        window.location.href = "mailto:digitalearner.business@gmail.com?subject=Help Request - Digital Earner&body=Hello, I need help with..."
+    }
+    
+    window.openWhatsApp = function() {
+        window.open("https://wa.me/918272848772?text=Hello%20I%20need%20help%20with%20Digital%20Earner%20website", "_blank")
+    }
+    
+    window.openInstagram = function() {
+        window.open("https://instagram.com/digital.earner73", "_blank")
+    }
+    
+    window.sendFeedbackEmail = function() {
+        const name = document.getElementById('userName').value.trim()
+        const email = document.getElementById('userEmail').value.trim()
+        const issueType = document.getElementById('issueType').value
+        const message = document.getElementById('message').value.trim()
+        
+        if (!name || !email || !message) {
+            alert("Please fill all fields")
+            return
+        }
+        
+        const subject = `Feedback from ${name} - ${issueType}`
+        const body = `Name: ${name}%0AEmail: ${email}%0AIssue Type: ${issueType}%0A%0AMessage:%0A${message}%0A%0A---%0ASent from Digital Earner App`
+        
+        window.location.href = `mailto:digitalearner.business@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+        
+        document.getElementById('userName').value = ''
+        document.getElementById('message').value = ''
+        
+        const toast = document.getElementById('successToast')
+        toast.style.display = 'block'
+        setTimeout(() => {
+            toast.style.display = 'none'
+        }, 3000)
+    }
+    
+    const menu = document.getElementById('menu')
+    const overlay = document.getElementById('overlay')
+    const menuBtn = document.getElementById('menuBtn')
+    const closeMenuBtn = document.getElementById('closeMenuBtn')
+    
+    function openMenuOnly() {
+        menu.classList.add('active')
+        overlay.classList.add('active')
+        document.body.classList.add('menu-open')
+        document.body.style.top = `-${window.scrollY}px`
+    }
+    
+    function closeMenuOnly() {
+        menu.classList.remove('active')
+        overlay.classList.remove('active')
+        document.body.classList.remove('menu-open')
+        const scrollY = document.body.style.top
+        document.body.style.top = ''
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+    }
+    
+    if (menuBtn) {
+        menuBtn.addEventListener('click', openMenuOnly)
+    }
+    
+    if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', closeMenuOnly)
+    }
+    
+    const backBtn = document.getElementById('backToDashboard')
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            window.location.href = 'dashboard.html'
+        })
+    }
+    
+    loadUserInfo()
+</script>
+
+</body>
+</html>
