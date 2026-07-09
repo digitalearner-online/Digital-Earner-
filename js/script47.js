@@ -115,10 +115,36 @@ regEmail.addEventListener('input', function() {
   }
 });
 
-document.getElementById("forgotPassword").addEventListener("click", (e) => {
-  e.preventDefault()
-  window.location.href = "reset-password.html"
-})
+document.getElementById("forgotPassword").addEventListener("click", async (e) => {
+  e.preventDefault();
+  
+  const email = document.getElementById("loginEmail").value.trim();
+  
+  if (!email) {
+    showError("loginEmail", "loginEmailError", "Please enter your email first.");
+    return;
+  }
+  
+  if (!validateEmail(email)) {
+    showError("loginEmail", "loginEmailError", "Please enter a valid email.");
+    return;
+  }
+  
+  document.getElementById("loading").style.display = "flex";
+  
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: "https://digitalearner.online/html/reset-password.html"
+  });
+  
+  document.getElementById("loading").style.display = "none";
+  
+  if (error) {
+    showError("loginEmail", "loginEmailError", error.message);
+    return;
+  }
+  
+  alert("Password reset link has been sent to your email.");
+});
 
 registerBtn.addEventListener('click', () => {
   container.classList.add('active');
