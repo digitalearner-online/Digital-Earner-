@@ -222,22 +222,6 @@ import { getSession } from "./auth.js";
             document.getElementById('loading').style.display = 'none'
         }
     }
-
-    window.triggerPasswordResetEmail = async function() {
-        if (!currentUser || !currentUser.email) return
-        document.getElementById('loading').style.display = 'flex'
-        try {
-            const { error } = await supabase.auth.resetPasswordForEmail(currentUser.email, {
-                redirectTo: window.location.origin + '/html/reset-password.html',
-            })
-            if (error) throw error
-            showToast("✉️ Secure reset link sent to your email!", "success")
-        } catch(err) {
-            showToast("❌ " + err.message, "error")
-        } finally {
-            document.getElementById('loading').style.display = 'none'
-        }
-    }
     
     document.getElementById('profileUpload').addEventListener('change', function(event) {
         const file = event.target.files[0]
@@ -318,3 +302,52 @@ import { getSession } from "./auth.js";
     protectPage().then((isLoggedIn) => {
         if(isLoggedIn) loadUserData()
     })
+    
+    // Open Reset Password Popup
+window.openResetPopup = function() {
+    document.getElementById("resetPopup").style.display = "flex";
+    document.getElementById("resetEmail").value = "";
+}
+
+// Close Reset Password Popup
+window.closeResetPopup = function() {
+    document.getElementById("resetPopup").style.display = "none";
+}
+
+// Send Reset Link
+window.sendResetEmail = async function() {
+    
+    const email = document.getElementById("resetEmail").value.trim();
+    
+    if (!email) {
+        showToast("❌ Please enter your email.", "error");
+        return;
+    }
+    
+    document.getElementById("loading").style.display = "flex";
+    
+    try {
+        
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + "/html/reset-password.html"
+        });
+        
+        if (error) throw error;
+        
+        closeResetPopup();
+        closeResetPopup();
+document.getElementById("resetEmail").value = "";
+
+        showToast("📩 If this email is registered, a password reset link has been sent. Please check your inbox.", "success");
+        
+    } catch (err) {
+        
+        showToast("❌ " + err.message, "error");
+        
+    } finally {
+        
+        document.getElementById("loading").style.display = "none";
+        
+    }
+    
+}
