@@ -320,15 +320,7 @@ transform:translateY(-3px);
 box-shadow:0 15px 35px rgba(0,0,0,0.12);
 }
 
-.box:active{
-animation:boxClick .4s ease forwards;
-}
 
-@keyframes boxClick{
-0%{transform:scale(1)}
-50%{transform:scale(1.08) rotate(2deg)}
-100%{transform:scale(1)}
-}
 
 .box-emoji{
 font-size:42px;
@@ -460,3 +452,28 @@ background:#f3f4f6;
     }
 }
 
+/* Remove Android tap highlight */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.box,
+.menu-btn,
+.menu-text,
+button,
+a,
+div {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.box:focus,
+.box:active,
+button:focus,
+button:active,
+a:focus,
+a:active {
+    outline: none;
+}

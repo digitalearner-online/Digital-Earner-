@@ -560,3 +560,29 @@
             90% { opacity: 1; }
             100% { opacity: 0; }
         }
+        
+        /* Remove Android tap highlight */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.box,
+.menu-btn,
+.menu-text,
+button,
+a,
+div {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.box:focus,
+.box:active,
+button:focus,
+button:active,
+a:focus,
+a:active {
+    outline: none;
+}
